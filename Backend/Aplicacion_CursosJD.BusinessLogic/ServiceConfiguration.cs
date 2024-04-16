@@ -9,7 +9,7 @@ namespace Aplicacion_CursosJD.BusinessLogic
     {
         public static void DataAccess(this IServiceCollection service, string conn)
         {
-            Aplicacion_CursosJD.DataAccess.Aplicacion_CursosJD.BuildConnectionString(conn);
+            Aplicacion_CursosJDContext.BuildConnectionString(conn);
         }
         public static void BusinessLogic(this IServiceCollection service)
         {
