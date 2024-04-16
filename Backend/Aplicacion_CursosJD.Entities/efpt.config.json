@@ -1,0 +1,97 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "Udemy_JasondanyContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entities",
+   "ProjectRootNamespace": "Aplicacion_CursosJD.Entities",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[Acce].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbPantallasPorRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbCategorias]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbCursos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbCusrsosPorUsuario]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbInstructores]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbInstructoresPorCurso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbRecursos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Curs].[tbTiposRecursos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Pago].[tbInfoPagos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Pago].[tbMetodosPagos]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "vb600.Udemy_JasonDany",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
