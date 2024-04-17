@@ -1,6 +1,8 @@
 using Aplicacion_CursosJD.API.Extensions;
 using Aplicacion_CursosJD.API.Services;
 using Aplicacion_CursosJD.BusinessLogic;
+using Aplicacion_CursosJD.BusinessLogic.Services;
+using Aplicacion_CursosJD.DataAccess.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +35,10 @@ namespace Aplicacion_CursosJD.API
             services.DataAccess(Configuration.GetConnectionString("CursoJDConn"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
-
+            services.AddScoped<GeneralServices>();
+            services.AddScoped<DepartamentoRepository>();
+            services.AddScoped<EstadoCivilesRepository>();
+            services.AddScoped<MunicipioRepository>();
             services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddSwaggerGen(c =>
