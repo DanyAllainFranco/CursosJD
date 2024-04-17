@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Aplicacion_CursosJD.DataAccess\Aplicacion_CursosJD.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
