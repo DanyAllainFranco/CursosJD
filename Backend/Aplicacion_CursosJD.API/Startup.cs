@@ -1,4 +1,5 @@
 using Aplicacion_CursosJD.API.Extensions;
+using Aplicacion_CursosJD.API.Services;
 using Aplicacion_CursosJD.BusinessLogic;
 using Aplicacion_CursosJD.BusinessLogic.Services;
 using Aplicacion_CursosJD.DataAccess.Repository;
@@ -28,6 +29,9 @@ namespace Aplicacion_CursosJD.API
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailService>();
+
             services.DataAccess(Configuration.GetConnectionString("CursoJDConn"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
