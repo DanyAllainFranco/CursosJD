@@ -48,8 +48,8 @@ namespace Aplicacion_CursosJD.API.Controllers
             {
                 Dep_Id = item.Dep_Id,
                 Dep_Descripcion = item.Dep_Descripcion,
-                Dep_UsuarioCreacion = item.Dep_UsuarioCreacion,
-                Dep_FechaCreacion = item.Dep_FechaCreacion,
+                Dep_UsuarioCreacion = 1/*item.Dep_UsuarioCreacion*/,
+                Dep_FechaCreacion = DateTime.Now /*item.Dep_FechaCreacion*/,
             };
             var list = _generalServices.InsertarDepto(modelo);
             return Ok(list);

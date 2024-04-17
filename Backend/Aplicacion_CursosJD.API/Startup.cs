@@ -36,9 +36,14 @@ namespace Aplicacion_CursosJD.API
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<GeneralServices>();
+            services.AddScoped<AccesoServices>();
             services.AddScoped<DepartamentoRepository>();
             services.AddScoped<EstadoCivilesRepository>();
             services.AddScoped<MunicipioRepository>();
+            services.AddScoped<UsuarioRepository>();
+            services.AddScoped<RolRepository>();
+            services.AddScoped<PantallaRepository>();
+            services.AddScoped<PantallasPorRolesRepository>();
             services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddSwaggerGen(c =>
