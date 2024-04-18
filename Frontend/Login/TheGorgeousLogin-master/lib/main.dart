@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:the_gorgeous_login/pages/login_page.dart';
+// import 'package:the_gorgeous_login/pages/login_page.dart';
+import 'package:the_gorgeous_login/pages/test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Inicio de sesion',
-      home: LoginPage(),
+      home: Categorias(),
     );
   }
 }

@@ -396,3 +396,22 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Frontend/Login/TheGorgeousLogin-master/linux/flutter/generated_plugin_registrant.cc
+Frontend/Login/TheGorgeousLogin-master/linux/flutter/generated_plugin_registrant.h
+Frontend/Login/TheGorgeousLogin-master/linux/flutter/generated_plugins.cmake
+Frontend/Login/TheGorgeousLogin-master/macos/Flutter/GeneratedPluginRegistrant.swift
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/CMakeLists.txt
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugin_registrant.cc
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugin_registrant.h
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugins.cmake
+Frontend/Login/TheGorgeousLogin-master/windows/runner/Runner.rc
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/CMakeLists.txt
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugin_registrant.cc
+Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugin_registrant.h
+*.cmake
+*.rc
+*.cc
+*.txt
+*.swift
+*.cmake
+*.h
