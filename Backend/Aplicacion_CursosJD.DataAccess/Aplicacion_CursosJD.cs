@@ -5,11 +5,11 @@ using System;
 
 namespace Aplicacion_CursosJD.DataAccess
 {
-    public class Aplicacion_CursosJDContext : Udemy_JasondanyContext
+    public class Aplicacion_CursosJD : Udemy_JasondanyContext
     {
         public static string ConnectionString { get; set; }
 
-        public Aplicacion_CursosJDContext()
+        public Aplicacion_CursosJD()
         {
             ChangeTracker.LazyLoadingEnabled = false;
         }
