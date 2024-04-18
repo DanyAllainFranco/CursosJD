@@ -415,3 +415,12 @@ Frontend/Login/TheGorgeousLogin-master/windows/flutter/generated_plugin_registra
 *.swift
 *.cmake
 *.h
+*.csproj
+*.cmake
+*.h
+*.cc
+*.swift
+*.cmake
+*.h
+*.cc
+*.csproj

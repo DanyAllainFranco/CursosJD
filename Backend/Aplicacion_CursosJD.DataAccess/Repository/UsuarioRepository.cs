@@ -4,6 +4,7 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using Aplicacion_CursosJD.Common.Model;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -13,15 +14,15 @@ namespace Aplicacion_CursosJD.DataAccess.Repository
 {
     public class UsuarioRepository
     {
-        public IEnumerable<tbUsuarios> List()
+        public IEnumerable<UsuarioViewModel> List()
         {
             const string sql = "Acce.sp_Usuarios_listar";
 
-            List<tbUsuarios> result = new List<tbUsuarios>();
+            List<UsuarioViewModel> result = new List<UsuarioViewModel>();
 
             using (var db = new SqlConnection(Aplicacion_CursosJD.ConnectionString))
             {
-                result = db.Query<tbUsuarios>(sql, commandType: CommandType.Text).ToList();
+                result = db.Query<UsuarioViewModel>(sql, commandType: CommandType.Text).ToList();
 
                 return result;
             }

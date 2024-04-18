@@ -1,127 +1,92 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class AppColors {
-  static Color objectRow = Colors.blue; // Example color
-  static Color objectListHeader = Colors.green; // Example color
-}
-
-class ObjectDataTable extends StatelessWidget {
-  final List<String> columnNames;
-  final List<List<Widget>> rowData;
-  final BoxConstraints constraint;
-
-  const ObjectDataTable({
-    Key? key,
-    required this.constraint,
-    required this.rowData,
-    required this.columnNames,
-  }) : super(key: key);
+class Categorias extends StatefulWidget {
+  const Categorias({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    double width = constraint.maxWidth - 50;
-    return Theme(
-      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-      child: DataTable(
-        dataRowHeight: 100,
-        columnSpacing: 0,
-        dividerThickness: 0,
-        columns: List<DataColumn>.generate(
-          columnNames.length,
-          (int index,) => DataColumn(
-            label: CustomCell(
-              isHeader: true,
-              width: width,
-              columnCnt: columnNames.length,
-              start: (index == 0),
-              end: (index == columnNames.length - 1),
-              child: Text(
-                columnNames[index],
-                textAlign: TextAlign.center,
-              ),
-              color: AppColors.objectListHeader,
-            ),
-            numeric: false,
-          ),
-        ),
-        rows: List<DataRow>.generate(
-          rowData.length,
-          (int index1,) => DataRow(
-            cells: List<DataCell>.generate(
-              rowData[index1].length,
-              (int index,) => DataCell(
-                CustomCell(
-                  width: width,
-                  columnCnt: rowData[index1].length,
-                  start: (index == 0),
-                  end: (index == rowData[index1].length - 1),
-                  child: rowData[index1][index],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<Categorias> createState() => _CategoriasState();
 }
 
-class CustomCell extends StatelessWidget {
-  final double width;
-  final bool start;
-  final bool end;
-  final Widget? child;
-  final int columnCnt;
-  final Color? color;
-  final bool isHeader;
+class _CategoriasState extends State<Categorias> {
+  String url = 'https://localhost:44392/API/Usuario/List';
 
-  const CustomCell({
-    Key? key,
-    this.isHeader = false,
-    required this.width,
-    required this.columnCnt,
-    this.color,
-    this.child,
-    this.start = false,
-    this.end = false,
-  }) : super(key: key);
+  Future<List<dynamic>> _getListado() async {
+    final result = await http.get(Uri.parse(url));
 
-  BorderRadius getBorderRadius() {
-    BorderRadius borderRadius = BorderRadius.zero;
-    if (!(start && end)) {
-      if (start) {
-        borderRadius = BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topLeft: Radius.circular(10),
-        );
-      } else if (end) {
-        borderRadius = BorderRadius.only(
-          bottomRight: Radius.circular(10),
-          topRight: Radius.circular(10),
-        );
+    if (result.statusCode == 200) {
+      // Parsea la respuesta JSON
+      final jsonResponse = jsonDecode(result.body);
+      print(jsonResponse);
+      // Verifica si la respuesta contiene una lista bajo una clave específica
+      if (jsonResponse is List) {
+        return jsonResponse;
+      } else {
+        // Si la respuesta no es una lista, puedes retornar una lista vacía o lanzar una excepción
+        // En este ejemplo, retornaremos una lista vacía
+        return [];
       }
+    } else {
+      throw Exception('Error al obtener los datos');
     }
-    return borderRadius;
-  }
-
-  Color getColor() {
-    Color myColor = AppColors.objectRow;
-    if (color != null) {
-      myColor = color!;
-    }
-    return myColor;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: child),
-      height: isHeader ? 40 : 70,
-      width: width / columnCnt,
-      decoration: BoxDecoration(
-        color: getColor(),
-        borderRadius: getBorderRadius(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Listado Categorias'),
+      ),
+      body: FutureBuilder<List<dynamic>>(
+        future: _getListado(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return _buildDataTable(snapshot.data!);
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
+
+ Widget _buildDataTable(List<dynamic> data) {
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: DataTable(
+      columns: const [
+        DataColumn(label: Text('ID')),
+        DataColumn(label: Text('Usuario')),
+        DataColumn(label: Text('Nombre')),
+        DataColumn(label: Text('Apellido')),
+        DataColumn(label: Text('Fecha de Nacimiento')),
+        DataColumn(label: Text('Sexo')),
+        DataColumn(label: Text('Dirección')),
+        DataColumn(label: Text('Teléfono')),
+        DataColumn(label: Text('Correo Electrónico')),
+      ],
+      rows: data.map((item) {
+        return DataRow(
+          cells: [
+            DataCell(Text(item['usu_Id'].toString())),
+            DataCell(Text(item['usu_Usuario'])),
+            DataCell(Text(item['usu_Nombre'])),
+            DataCell(Text(item['usu_Apellido'])),
+            DataCell(Text(item['usu_FechaNacimiento'])),
+            DataCell(Text(item['usu_Sexo'])),
+            DataCell(Text(item['usu_Direccion'])),
+            DataCell(Text(item['usu_Telefono'].toString())),
+            DataCell(Text(item['usu_CorreoElectronico'])),
+          ],
+        );
+      }).toList(),
+    ),
+  );
+}
 }
