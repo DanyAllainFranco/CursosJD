@@ -25,7 +25,7 @@ namespace Aplicacion_CursosJD.API.Controllers
         public IActionResult Index()
         {
             var list = _AccesoServices.ListadoUsuario();
-            return Ok(list);
+            return Ok(list.Data);
         }
 
 

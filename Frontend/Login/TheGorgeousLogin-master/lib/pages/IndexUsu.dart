@@ -1,92 +1,79 @@
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 
-class Categorias extends StatefulWidget {
-  const Categorias({Key? key}) : super(key: key);
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
 
   @override
-  State<Categorias> createState() => _CategoriasState();
+  State<MyWidget> createState() => _MyWidgetState();
 }
+//Future
+//Final
+//Dynamic
+class _MyWidgetState extends State<MyWidget> {
+  String url = "https://localhost:44392/API/Usuario/List";
 
-class _CategoriasState extends State<Categorias> {
-  String url = 'https://localhost:44392/API/Usuario/List';
-
-  Future<List<dynamic>> _getListado() async {
-    final result = await http.get(Uri.parse(url));
-
-    if (result.statusCode == 200) {
-      // Parsea la respuesta JSON
-      final jsonResponse = jsonDecode(result.body);
-      print(jsonResponse);
-      // Verifica si la respuesta contiene una lista bajo una clave específica
-      if (jsonResponse is List) {
-        return jsonResponse;
-      } else {
-        // Si la respuesta no es una lista, puedes retornar una lista vacía o lanzar una excepción
-        // En este ejemplo, retornaremos una lista vacía
-        return [];
-      }
-    } else {
-      throw Exception('Error al obtener los datos');
-    }
+  Future<dynamic> _getListado() async{
+    final resultado = await http.get(Uri.parse(url));
+    if (resultado.statusCode == 200) {
+    return jsonDecode(resultado.body);
+  }else {
+    print("Error en el endPoint");
   }
-
+   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Listado Categorias'),
-      ),
-      body: FutureBuilder<List<dynamic>>(
+    appBar: AppBar(
+      title: const Text("Listado API"),
+    ),
+    body: FutureBuilder<dynamic>( 
         future: _getListado(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _buildDataTable(snapshot.data!);
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
+        builder: (context,snapshot){
+          if(snapshot.hasData){
+            var listOfData = snapshot.data as List<dynamic>;
+             return SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columns: const [
+                    DataColumn(label: Text('ID')),
+                    DataColumn(label: Text('Usuario')),
+
+                  ],
+                  rows: 
+                      listOfData.map(
+                        (usuario) => DataRow(cells: [
+                          DataCell(Text(usuario['usu_Id'].toString())),
+                          DataCell(Text(usuario['usu_Usuario'])),
+                          // Agrega aquí más DataCell para más datos
+                        ]),
+                      )
+                      .toList(),
+                ),
+              ),
             );
-          } else {
-            return const Center(child: CircularProgressIndicator());
+          }else{
+            return Center(child: CircularProgressIndicator());
           }
         },
-      ),
+            ),
     );
   }
+  List<Widget> listado(List<dynamic>? info){
+  List<Widget> lista = [];
+  if(info!= null){
+    info.forEach((element) {
+      lista.add(Text(element["usu_Usuario"]));
+    });
 
- Widget _buildDataTable(List<dynamic> data) {
-  return SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: DataTable(
-      columns: const [
-        DataColumn(label: Text('ID')),
-        DataColumn(label: Text('Usuario')),
-        DataColumn(label: Text('Nombre')),
-        DataColumn(label: Text('Apellido')),
-        DataColumn(label: Text('Fecha de Nacimiento')),
-        DataColumn(label: Text('Sexo')),
-        DataColumn(label: Text('Dirección')),
-        DataColumn(label: Text('Teléfono')),
-        DataColumn(label: Text('Correo Electrónico')),
-      ],
-      rows: data.map((item) {
-        return DataRow(
-          cells: [
-            DataCell(Text(item['usu_Id'].toString())),
-            DataCell(Text(item['usu_Usuario'])),
-            DataCell(Text(item['usu_Nombre'])),
-            DataCell(Text(item['usu_Apellido'])),
-            DataCell(Text(item['usu_FechaNacimiento'])),
-            DataCell(Text(item['usu_Sexo'])),
-            DataCell(Text(item['usu_Direccion'])),
-            DataCell(Text(item['usu_Telefono'].toString())),
-            DataCell(Text(item['usu_CorreoElectronico'])),
-          ],
-        );
-      }).toList(),
-    ),
-  );
+  }
+  return lista;
 }
 }
+

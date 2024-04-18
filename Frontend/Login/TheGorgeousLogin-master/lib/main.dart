@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Inicio de sesion',
-      home: Categorias(),
+      home: MyWidget(),
     );
   }
 }
