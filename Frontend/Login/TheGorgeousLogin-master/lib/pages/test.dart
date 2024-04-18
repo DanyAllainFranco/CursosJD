@@ -14,7 +14,7 @@ class _CategoriasState extends State<Categorias> {
   String url = 'https://api.thecatapi.com/v1/categories';
 
   Future<List<dynamic>> _getListado() async {
-    final result = await http.get(Uri.parse(url));
+    final http.Response result = await http.get(Uri.parse(url));
 
     if (result.statusCode == 200) {
       return jsonDecode(result.body);
@@ -31,7 +31,8 @@ class _CategoriasState extends State<Categorias> {
       ),
       body: FutureBuilder<List<dynamic>>(
         future: _getListado(),
-        builder: (context, snapshot) {
+        // ignore: always_specify_types
+        builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
             return _buildDataTable(snapshot.data!);
           } else if (snapshot.hasError) {
@@ -50,13 +51,14 @@ class _CategoriasState extends State<Categorias> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-        columns: const [
+        columns: const <DataColumn>[
           DataColumn(label: Text('Nombre')),
           DataColumn(label: Text('ID')),
         ],
+        // ignore: always_specify_types
         rows: data.map((item) {
           return DataRow(
-            cells: [
+            cells: <DataCell>[
               DataCell(Text(item['name'])),
               DataCell(Text(item['id'].toString())),
             ],

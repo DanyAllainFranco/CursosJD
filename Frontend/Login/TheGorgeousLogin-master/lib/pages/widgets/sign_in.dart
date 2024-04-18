@@ -122,12 +122,12 @@ class _SignInState extends State<SignIn> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 170.0),
-                decoration: BoxDecoration(
+                decoration:  const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  color: Color(0xFF1f305e), // Color sólido #1f305e
+                  color: Color.fromARGB(255, 110, 33, 155), // Color sólido #1f305e
                 ),
                 child: MaterialButton(
-                  highlightColor: Colors.transparent,
+                  highlightColor: const Color.fromARGB(80, 165, 216, 45),
                   splashColor: CustomTheme.loginGradientEnd,
                   child: const Padding(
                     padding:

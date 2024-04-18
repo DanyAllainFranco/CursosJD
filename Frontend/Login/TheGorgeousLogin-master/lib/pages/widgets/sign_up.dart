@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:the_gorgeous_login/theme.dart';
+// ignore: unused_import
 import 'package:the_gorgeous_login/widgets/snackbar.dart';
 
 class SignUp extends StatefulWidget {
@@ -205,7 +206,7 @@ class _SignUpState extends State<SignUp> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 340.0),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   color: Color(0xFF1f305e), // Color sólido #1f305e
                 ),
